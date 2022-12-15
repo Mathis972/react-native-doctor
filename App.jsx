@@ -5,11 +5,20 @@ import Auth from './components/Auth';
 import { supabase } from './supabase';
 import AccountScreen from './pages/AccountScreen';
 import AppointmentScreen from './pages/AppointmentScreen';
+import { setNotificationHandler } from 'expo-notifications';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [session, setSession] = React.useState(null);
+
+  setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: false,
+      shouldSetBadge: false,
+    }),
+  });
 
   React.useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -25,18 +34,15 @@ export default function App() {
       <Stack.Navigator>
         {session && session.user ? (
           <Stack.Screen
-            key={session.user.id} 
+            key={session.user.id}
             name="Account"
             component={AccountScreen}
-            initialParams={{session}}
+            initialParams={{ session }}
           />
         ) : (
-          <Stack.Screen name="LogIn"  component={Auth} />
+          <Stack.Screen name="LogIn" component={Auth} />
         )}
-        <Stack.Screen
-            name="AppointmentScreen"
-            component={AppointmentScreen}
-          />
+        <Stack.Screen name="AppointmentScreen" component={AppointmentScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

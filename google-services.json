@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "930167273442",
+    "project_id": "my-rdv-app",
+    "storage_bucket": "my-rdv-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930167273442:android:1e5012d7b85c658523abbb",
+        "android_client_info": {
+          "package_name": "com.rdv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930167273442-671kr6mgjos566i5fmuuvsh3ja7k3itv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYX5c8QqLVDXyVcuaITTuFIhpualgWChg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930167273442-671kr6mgjos566i5fmuuvsh3ja7k3itv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
