@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Auth from './components/Auth';
 import { supabase } from './supabase';
 import AccountScreen from './pages/AccountScreen';
+import AppointmentScreen from './pages/AppointmentScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +33,10 @@ export default function App() {
         ) : (
           <Stack.Screen name="LogIn"  component={Auth} />
         )}
+        <Stack.Screen
+            name="AppointmentScreen"
+            component={AppointmentScreen}
+          />
       </Stack.Navigator>
     </NavigationContainer>
   );

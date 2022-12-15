@@ -8,6 +8,7 @@ export default function AccountScreen({ navigation, route }) {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState('');
   const [markedDates, setMarkedDates] = useState({});
+  const [appointments, setAppointments] = useState([]);
   const session = route.params.session;
 
   useEffect(() => {
@@ -75,17 +76,16 @@ export default function AccountScreen({ navigation, route }) {
         .eq('doctor_id', session?.user.id);
       if (error) throw error;
       if (data) {
-        console?.log(data);
+        setAppointments(data);
         for (const apt of data) {
           const isBefore = new Date() > new Date(apt.date);
           markedDates[apt.date] = {
+            key: apt.id,
             selected: true,
             marked: true,
             selectedColor: isBefore ? 'grey' : 'blue',
-            name: `RDV avec ${apt.profiles.first_name} ${apt.profiles.last_name}`,
           };
           setMarkedDates(markedDates);
-          console.log(markedDates);
         }
       }
     } catch (error) {
@@ -118,7 +118,10 @@ export default function AccountScreen({ navigation, route }) {
       </View>
       <Calendar
         onDayPress={day => {
-            console.log('selected day', day);
+            if (markedDates[day.dateString]) {
+              const selectedAppointment = appointments.find((apt) => apt.id === markedDates[day.dateString].key);
+              navigation.navigate('AppointmentScreen', {appointment: selectedAppointment })
+            }
         }}
         onMonthChange={month => {
             console.log('month changed', month);
